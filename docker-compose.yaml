@@ -3,7 +3,7 @@ services:
     image: bitnami/laravel:11
     container_name: lamp_web
     ports:
-      - "80:80"
+      - "80:8000"
     environment:
       LARAVEL_DATABASE_TYPE: mysql
       LARAVEL_DATABASE_HOST: db
