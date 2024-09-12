@@ -1,11 +1,9 @@
-version: '3.8'
-
 services:
   web:
     image: php:8.1-apache-bullseye
     container_name: lamp_web
     ports:
-      - "8080:80"
+      - "80:80"
     networks:
       - lamp_network
     depends_on:
@@ -18,12 +16,26 @@ services:
     networks:
       - lamp_network
     environment:
-      MYSQL_ROOT_PASSWORD: value
+      MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: lamp_db
       MYSQL_USER: lamp_user
       MYSQL_PASSWORD: userpassword
     volumes:
       - db_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: lamp_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_ARBITRARY: 1
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    networks:
+      - lamp_network
 
 
 volumes:
@@ -31,6 +43,3 @@ volumes:
 
 networks:
   lamp_network:
-
-
-  
