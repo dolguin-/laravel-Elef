@@ -11,7 +11,7 @@ services:
     volumes:
       - ./src:/var/www/html
   db:
-    image: mysql:latest
+    image: mysql:9
     container_name: lamp_db
     networks:
       - lamp_network
@@ -22,14 +22,13 @@ services:
       MYSQL_PASSWORD: userpassword
     volumes:
       - db_data:/var/lib/mysql
+  # PHP my admin is Only for Lab purposes
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin:latest
     container_name: lamp_phpmyadmin
     restart: always
     environment:
       PMA_HOST: db
-      PMA_ARBITRARY: 1
-      MYSQL_ROOT_PASSWORD: rootpassword
     ports:
       - "8081:80"
     depends_on:
