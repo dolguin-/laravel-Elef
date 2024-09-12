@@ -1,15 +1,22 @@
 services:
   web:
-    image: php:8.1-apache-bullseye
+    image: bitnami/laravel:11
     container_name: lamp_web
     ports:
       - "80:80"
+    environment:
+      LARAVEL_DATABASE_TYPE: mysql
+      LARAVEL_DATABASE_HOST: db
+      LARAVEL_DATABASE_PORT_NUMBER: 3306
+      LARAVEL_DATABASE_USER: lamp_user
+      LARAVEL_DATABASE_PASSWORD: userpassword
+      LARAVEL_DATABASE_NAME: lamp_db
     networks:
       - lamp_network
     depends_on:
       - db
     volumes:
-      - ./src:/var/www/html
+      - ./src:/app
   db:
     image: mysql:9
     container_name: lamp_db
