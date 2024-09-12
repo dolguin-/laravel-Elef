@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Message;
 
 Route::get('/', function () {
-    return view('welcome');
+    $message = Message::first();
+    return view('hello', ['message' => $message->message]);
 });
