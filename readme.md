@@ -44,3 +44,8 @@ docker compose stop
 ```
 docker compose logs
 ```
+
+
+## autor
+
+Damian Olguin @ Teracloud
